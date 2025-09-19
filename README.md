@@ -15,7 +15,7 @@ Users can input a project idea, and the backend calls OpenAI's API to generate d
 
 * **Frontend**: React.js + TypeScript
 * **Backend**: Node.js + Express.js + TypeScript 
-* **AI Integration**: OpenAI API
+* **AI Integration**: OpenAI API/Google Gemini API
 
 ## Usage
 
