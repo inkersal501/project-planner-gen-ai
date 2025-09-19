@@ -43,7 +43,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100 transition-colors duration-500 flex flex-col">
       <Header />
-
+ 
       <main className="flex flex-col items-center px-4 mt-10 w-full max-w-5xl mx-auto space-y-10">
         <ProjectForm onGenerate={handleGenerate} showLoading={showLoading} />
 
