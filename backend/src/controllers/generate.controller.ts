@@ -13,19 +13,27 @@ export const handleGenerate = async (req: Request<{}, {}, IdeaRequest>, res: Res
   try {
     const prompt = `
       You are a software architect AI. 
-      Based on the following idea and tech stack, generate a short MVP plan with key features, suggested architecture, and timeline.
+      Based on the following idea and tech stack, generate a short MVP plan.
 
       Idea: ${idea}
       Tech Stack: ${techStack || 'Latest Tech Stack'}
 
-      Respond in structured JSON format with:
+     Important: 
+      Always respond ONLY in valid JSON.
+      Do not include markdown formatting, no \`\`\`json blocks, no extra text.
+
+      Use exactly this schema:
       {
-      "mvpFeatures": [...],
-      "suggestedArchitecture": "...",
-      "estimatedTimeline": "...",
-      "nextSteps": [...]
+        "mvpFeatures": [
+          "string", "string", "string"
+        ],
+        "suggestedArchitecture": "string",
+        "estimatedTimeline": "string",
+        "nextSteps": [
+          "string", "string", "string"
+        ]
       }
-    `;
+      `;
 
     // const chatCompletion = await openai.chat.completions.create({
     //   model: 'gpt-3.5-turbo',
@@ -33,10 +41,9 @@ export const handleGenerate = async (req: Request<{}, {}, IdeaRequest>, res: Res
     // });
     // const response = chatCompletion.choices[0]?.message?.content;
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
-    const result = await model.generateContent(prompt);
-    const response = await result.response.text();
-
+    const result = await genAI.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt  }); 
+    let response : string = result.text || ""; 
+    response  = JSON.parse(response);
     res.json({
       message: 'AI Response generated successfully',
       data: {

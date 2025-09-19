@@ -6,7 +6,15 @@ import { ToastContainer } from 'react-toastify'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ToastContainer position="top-center" autoClose={2000} />
+    <ToastContainer position="top-right" 
+        autoClose={3000} 
+        hideProgressBar={false} 
+        newestOnTop={false} 
+        closeOnClick 
+        rtl={false} 
+        pauseOnFocusLoss 
+        draggable 
+        pauseOnHover />
     <App />
   </StrictMode>,
 )
